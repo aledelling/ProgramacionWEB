@@ -14,11 +14,12 @@
             <li><a href="#ejercicio2" class="nav-link">Serie Matematica</a></li>
             <li><a href="#ejercicio3" class="nav-link">Clasificacion de Deportes</a></li>
             <li><a href="#ejercicio4" class="nav-link">Día de la Semana</a></li>
+            <li><a href="#ejercicio5" class="nav-link">Suma de Array</a></li>
         </ul>
     </nav>
     <div class="container">
         <section id="calculadora-huevos" class="ejercicio-section">
-            <h1>Calculadora de Ventas de Huevos</h1>
+            <h1>Ejercicio 1: Calculadora de Ventas de Huevos</h1>
             <form id="formulario-huevos" onsubmit="return false;">
                 <label for="tipo">Tipo de huevo:</label>
                 <select id="tipo" required>
@@ -94,9 +95,20 @@
             </form>
             <div class="resultado" id="resultado-dia-semana"></div>
         </section>
+        <section id="ejercicio5" class="ejercicio-section" style="display:none;">
+            <h1>Ejercicio 5: Suma de Array</h1>
+            <form id="sumasarray">
+                <label for="array">Ingresa números separados por coma (ej: 1,2,3,4,5):</label>
+                <input type="text" id="array" required>
+                <button type="submit" class="button">Sumar</button>
+            </form>
+            <div class="resultado" id="resultado-suma-array"></div>
+        </section>
     </div>
+    
     <script src="static/js/app.js"></script>
     <script>
+        
     // Navegación entre ejercicios (solo frontend, sin recarga)
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {

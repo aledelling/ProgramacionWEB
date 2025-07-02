@@ -46,3 +46,27 @@ function validarNumero(entrada) {
               resultadoDiaSemana.textContent = `El día de la semana es: ${semana[numero - 1]}`;
           });
       }
+
+
+      // --- EJERCICIO 5: SUMAS ARRAY (con try-catch)
+
+      const sumasarray = document.getElementById('sumasarray');
+      const resultado = document.getElementById('resultado');
+      if (sumasarray) {
+        sumasarray.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const array = document.getElementById('array').value;
+            const suma = document.getElementById('suma').value;
+        });
+      }
+      
+      const array = [1, 2, 3, 4, 5];
+      let suma = 0;
+      for (let i = 0; i < sumasarrayarray.length; i++) {
+        try {
+            suma += array[i];
+        } catch (error) {
+            console.error(error.message);
+        }
+      }
+      document.write(`La suma de los elementos del array es: ${suma}`);

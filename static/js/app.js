@@ -172,7 +172,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- EJERCICIO 4: DÍA DE LA SEMANA (con try-catch) ---
     const formDiaSemana = document.getElementById('form-dia-semana');
+
     const resultadoDiaSemana = document.getElementById('resultado-dia-semana');
+
     if (formDiaSemana) {
         formDiaSemana.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -192,4 +194,39 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // --- EJERCICIO 5: SUMA DE ARRAY (con try-catch) ---
+    const sumasarray = document.getElementById('sumasarray');
+    const resultadoSumaArray = document.getElementById('resultado-suma-array');
+    
+    if (sumasarray) {
+        sumasarray.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const entrada = document.getElementById('array').value;
+            try {
+                // Convertir la entrada en un array de números
+                const numeros = entrada.split(',').map(num => {
+                    const n = Number(num.trim());
+                    if (isNaN(n)) throw new Error(`"${num}" no es un número válido.`);
+                    return n;
+                });
+                // Sumar los valores del array usando do...while
+                let suma = 0;
+                let i = 0;
+                do {
+                    try {
+                        suma += numeros[i];
+                    } catch (error) {
+                        // Este catch es redundante aquí, pero lo dejamos por la consigna
+                        console.error(error.message);
+                    }
+                    i++;
+                } while (i < numeros.length);
+                resultadoSumaArray.textContent = `La suma del array es: ${suma}`;
+            } catch (error) {
+                resultadoSumaArray.textContent = 'Error: ' + error.message;
+            }
+        });
+    }
+
 });
