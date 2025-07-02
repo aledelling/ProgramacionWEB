@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const diaInput = document.getElementById('dia');
     const resultadoDiv = document.getElementById('resultado');
 
-    // Precios por tipo
+    // Precios por tipo-/*
     const precios = { 'A': 500, 'AA': 600, 'AAA': 650 };
     const nombres = { 'A': 'A', 'AA': 'AA', 'AAA': 'AAA' };
 

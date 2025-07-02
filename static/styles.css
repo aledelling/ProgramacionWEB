@@ -97,3 +97,39 @@ form input[type="checkbox"] {
 .eliminar-huevo:hover {
     background: #a71d2a;
 }
+.main-nav {
+    background: #007bff;
+    padding: 0;
+    margin: 0 0 24px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.main-nav li {
+    margin: 0;
+}
+.main-nav .nav-link {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 28px;
+    font-size: 1.1rem;
+    transition: background 0.2s, color 0.2s;
+}
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active {
+    background: #0056b3;
+    color: #ffd700;
+}
+.ejercicio-section {
+    animation: fadeIn 0.4s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
