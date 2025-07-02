@@ -4,10 +4,8 @@
 // para asegurar que los elementos existen antes de usarlos
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Array para almacenar las combinaciones de huevos
+    // --- CALCULADORA DE HUEVOS ---
     let listaHuevos = [];
-
-    // Obtiene los elementos del DOM
     const formulario = document.getElementById('formulario-huevos');
     const agregarBtn = document.getElementById('agregar');
     const tipoInput = document.getElementById('tipo');
@@ -17,12 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const frecuenteInput = document.getElementById('frecuente');
     const diaInput = document.getElementById('dia');
     const resultadoDiv = document.getElementById('resultado');
-
-    // Precios por tipo-/*
     const precios = { 'A': 500, 'AA': 600, 'AAA': 650 };
     const nombres = { 'A': 'A', 'AA': 'AA', 'AAA': 'AAA' };
 
-    // Función para renderizar la lista de huevos agregados
     function renderLista() {
         if (listaHuevos.length === 0) {
             listaDiv.innerHTML = '<em>No has agregado huevos aún.</em>';
@@ -35,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         html += '</ul>';
         listaDiv.innerHTML = html;
-        // Agregar eventos a los botones de eliminar
         document.querySelectorAll('.eliminar-huevo').forEach(btn => {
             btn.addEventListener('click', function() {
                 const idx = parseInt(this.getAttribute('data-idx'));
@@ -45,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Evento para agregar una combinación de huevos
     agregarBtn.addEventListener('click', function() {
         const tipo = tipoInput.value;
         const cantidad = parseInt(cantidadInput.value);
@@ -59,22 +52,18 @@ document.addEventListener('DOMContentLoaded', function() {
         tipoInput.focus();
     });
 
-    // Evento para calcular el total considerando todas las combinaciones
     formularioFinal.addEventListener('submit', function(e) {
         e.preventDefault();
         if (listaHuevos.length === 0) {
             resultadoDiv.textContent = 'Agrega al menos una combinación de huevos.';
             return;
         }
-        // Sumar la cantidad total y el precio base
         let cantidadTotal = 0;
         let precioBase = 0;
         listaHuevos.forEach(item => {
             cantidadTotal += item.cantidad;
             precioBase += precios[item.tipo] * item.cantidad;
         });
-
-        // Descuento por cantidad total
         let descuento = 0;
         if (cantidadTotal >= 30 && cantidadTotal <= 45) {
             descuento = 0.10;
@@ -86,13 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
             descuento = 0.25;
         }
         let precioConDescuento = precioBase * (1 - descuento);
-
-        // Descuento adicional por cliente frecuente
         if (frecuenteInput.checked) {
             precioConDescuento *= 0.975;
         }
-
-        // Ajuste por día de la semana
         let precioFinal = precioConDescuento;
         const dia = diaInput.value;
         if (["lunes", "martes", "miércoles", "jueves", "viernes"].includes(dia)) {
@@ -100,11 +85,111 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (dia === "sábado") {
             precioFinal *= 0.95;
         }
-        // Domingo no cambia
-
         resultadoDiv.textContent = `Total a pagar: $${precioFinal.toLocaleString('es-CO', {minimumFractionDigits: 0})}`;
     });
-
-    // Render inicial
     renderLista();
+
+    // --- EJERCICIO 2: SERIE MATEMÁTICA ---
+    const formSerie = document.getElementById('form-serie');
+    const resultadoSerie = document.getElementById('resultado-serie');
+    if (formSerie) {
+        formSerie.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const x = parseFloat(document.getElementById('x').value);
+            const n = parseInt(document.getElementById('n').value);
+            if (isNaN(x) || isNaN(n) || n < 2 || n % 2 !== 0) {
+                resultadoSerie.textContent = 'Por favor, ingresa valores válidos (n debe ser par y mayor o igual a 2).';
+                return;
+            }
+            let suma = 0;
+            for (let i = 2; i <= n; i += 2) {
+                suma += Math.pow(x, i) / i;
+            }
+            resultadoSerie.textContent = `El resultado de la serie es: ${suma}`;
+        });
+    }
+
+    // --- EJERCICIO 3: CLASIFICACIÓN DE DEPORTES ---
+    const formDeportes = document.getElementById('form-deportes');
+    const listaDeportesDiv = document.getElementById('lista-deportes');
+    const resultadoDeportes = document.getElementById('resultado-deportes');
+    const agregarDeporteBtn = document.getElementById('agregar-deporte');
+    const mostrarClasificacionBtn = document.getElementById('mostrar-clasificacion');
+    let deportes = [
+        { nombre: 'Ajedrez', cantidad: 0 },
+        { nombre: 'Atletismo', cantidad: 0 },
+        { nombre: 'Fútbol', cantidad: 0 },
+        { nombre: 'Gimnasia', cantidad: 0 },
+        { nombre: 'Natación', cantidad: 0 }
+    ];
+    function renderDeportes() {
+        let total = deportes.reduce((acc, d) => acc + d.cantidad, 0);
+        let html = `<strong>Total asignado: ${total} / 400</strong><ul>`;
+        deportes.forEach((dep, idx) => {
+            html += `<li>${dep.nombre}: ${dep.cantidad} <button class='eliminar-huevo' data-idx='${idx}'>Quitar</button></li>`;
+        });
+        html += '</ul>';
+        listaDeportesDiv.innerHTML = html;
+        document.querySelectorAll('#lista-deportes .eliminar-huevo').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const idx = parseInt(this.getAttribute('data-idx'));
+                deportes[idx].cantidad = 0;
+                renderDeportes();
+            });
+        });
+    }
+    if (agregarDeporteBtn) {
+        agregarDeporteBtn.addEventListener('click', function() {
+            const deporte = document.getElementById('deporte').value;
+            const cantidad = parseInt(document.getElementById('cantidad-deporte').value);
+            if (!deporte || isNaN(cantidad) || cantidad < 1) {
+                alert('Por favor, selecciona un deporte y una cantidad válida.');
+                return;
+            }
+            let total = deportes.reduce((acc, d) => acc + d.cantidad, 0);
+            if (total + cantidad > 400) {
+                alert('No puedes asignar más de 400 personas en total.');
+                return;
+            }
+            let dep = deportes.find(d => d.nombre === deporte);
+            dep.cantidad += cantidad;
+            renderDeportes();
+            formDeportes.reset();
+        });
+    }
+    if (mostrarClasificacionBtn) {
+        mostrarClasificacionBtn.addEventListener('click', function() {
+            let total = deportes.reduce((acc, d) => acc + d.cantidad, 0);
+            if (total !== 400) {
+                resultadoDeportes.textContent = 'Debes asignar exactamente 400 personas entre los deportes.';
+                return;
+            }
+            let resumen = deportes.map(d => `${d.nombre}: ${d.cantidad}`).join(' | ');
+            resultadoDeportes.textContent = 'Clasificación final: ' + resumen;
+        });
+    }
+    if (listaDeportesDiv) renderDeportes();
+
+    // --- EJERCICIO 4: DÍA DE LA SEMANA (con try-catch) ---
+    const formDiaSemana = document.getElementById('form-dia-semana');
+    const resultadoDiaSemana = document.getElementById('resultado-dia-semana');
+    if (formDiaSemana) {
+        formDiaSemana.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const entrada = document.getElementById('numero-dia').value;
+            try {
+                let numero = Number(entrada);
+                if (isNaN(numero)) {
+                    throw new Error('La entrada no es un número.');
+                }
+                if (numero < 1 || numero > 7) {
+                    throw new Error('El número debe estar entre 1 y 7.');
+                }
+                const semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+                resultadoDiaSemana.textContent = `El día de la semana es: ${semana[numero - 1]}`;
+            } catch (error) {
+                resultadoDiaSemana.textContent = 'Error: ' + error.message;
+            }
+        });
+    }
 });

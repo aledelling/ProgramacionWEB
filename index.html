@@ -11,8 +11,9 @@
     <nav class="main-nav">
         <ul>
             <li><a href="#calculadora-huevos" class="nav-link active">Calculadora de Huevos</a></li>
-            <li><a href="#ejercicio2" class="nav-link">Ejercicio 2</a></li>
-            <li><a href="#ejercicio3" class="nav-link">Ejercicio 3</a></li>
+            <li><a href="#ejercicio2" class="nav-link">Serie Matematica</a></li>
+            <li><a href="#ejercicio3" class="nav-link">Clasificacion de Deportes</a></li>
+            <li><a href="#ejercicio4" class="nav-link">Día de la Semana</a></li>
         </ul>
     </nav>
     <div class="container">
@@ -55,12 +56,43 @@
             <div class="resultado" id="resultado"></div>
         </section>
         <section id="ejercicio2" class="ejercicio-section" style="display:none;">
-            <h1>Ejercicio 2</h1>
-            <p>Aquí podrás agregar otro ejercicio en el futuro.</p>
+            <h1>Ejercicio 2: Serie Matemática</h1>
+            <form id="form-serie">
+                <label for="x">Valor de x:</label>
+                <input type="number" id="x" required step="any">
+                <label for="n">Valor de n (par):</label>
+                <input type="number" id="n" required min="2" step="2">
+                <button type="submit" class="button">Calcular Serie</button>
+            </form>
+            <div class="resultado" id="resultado-serie"></div>
         </section>
         <section id="ejercicio3" class="ejercicio-section" style="display:none;">
-            <h1>Ejercicio 3</h1>
-            <p>Aquí podrás agregar otro ejercicio en el futuro.</p>
+            <h1>Ejercicio 3: Clasificación de Deportes</h1>
+            <form id="form-deportes">
+                <label for="deporte">Selecciona el deporte:</label>
+                <select id="deporte" required>
+                    <option value="Ajedrez">Ajedrez</option>
+                    <option value="Atletismo">Atletismo</option>
+                    <option value="Fútbol">Fútbol</option>
+                    <option value="Gimnasia">Gimnasia</option>
+                    <option value="Natación">Natación</option>
+                </select>
+                <label for="cantidad">Cantidad de personas:</label>
+                <input type="number" id="cantidad-deporte" min="1" max="400" required>
+                <button type="button" class="button" id="agregar-deporte">Agregar</button>
+            </form>
+            <div class="lista-huevos" id="lista-deportes"></div>
+            <button class="button" id="mostrar-clasificacion">Mostrar Clasificación</button>
+            <div class="resultado" id="resultado-deportes"></div>
+        </section>
+        <section id="ejercicio4" class="ejercicio-section" style="display:none;">
+            <h1>Ejercicio 4: Día de la Semana</h1>
+            <form id="form-dia-semana">
+                <label for="numero-dia">Ingresa un número del 1 al 7:</label>
+                <input type="number" id="numero-dia" min="1" max="7" required>
+                <button type="submit" class="button">Mostrar Día</button>
+            </form>
+            <div class="resultado" id="resultado-dia-semana"></div>
         </section>
     </div>
     <script src="static/js/app.js"></script>
