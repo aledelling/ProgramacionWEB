@@ -4,16 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programación Para La Web</title>
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 
- <!--Esta es la forma más común y recomendada para mantener el código organizado.-->
 <body>
+    <div class="container">
+        <h1>Calculadora de Ventas de Huevos</h1>
+        <form id="formulario-huevos" onsubmit="return false;">
+            <label for="tipo">Tipo de huevo:</label>
+            <select id="tipo" required>
+                <option value="A">A ($500)</option>
+                <option value="AA">AA ($600)</option>
+                <option value="AAA">AAA ($650)</option>
+            </select>
 
-    <h1>Hola Mundo!</h1>
-    
-    <!-- Vinculando el archivo JavaScript externo -->
-    <!-- Colocar el <script> al final del cuerpo (body) asegura que el DOM ya esté cargado cuando se ejecute el script:-->
+            <label for="cantidad">Cantidad de huevos:</label>
+            <input type="number" id="cantidad" min="1" required>
+
+            <button type="button" class="button" id="agregar">Agregar</button>
+        </form>
+
+        <div id="lista-huevos" class="lista-huevos"></div>
+
+        <form id="formulario-final">
+            <label for="frecuente">
+                <input type="checkbox" id="frecuente"> Cliente frecuente
+            </label>
+
+            <label for="dia">Día de la semana:</label>
+            <select id="dia" required>
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miércoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sábado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+
+            <button type="submit" class="button">Calcular Total</button>
+        </form>
+        <div class="resultado" id="resultado"></div>
+    </div>
     <script src="static/js/app.js"></script>
-
 </body>
 </html>
