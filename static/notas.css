@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container-notas {
+    background: #fff;
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 32px 28px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(21,101,192,0.10);
+}
+
+h1 {
+    text-align: center;
+    color: #1565c0;
+    margin-bottom: 24px;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+input[type="number"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #b2c6db;
+    font-size: 1em;
+}
+
+button[type="submit"] {
+    background: linear-gradient(90deg, #42a5f5 0%, #1565c0 100%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+button[type="submit"]:hover:enabled {
+    background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%);
+}
+
+#contador-alumnos {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #1976d2;
+    font-weight: bold;
+}
+
+#lista-notas ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#lista-notas li {
+    background: #eaf1fb;
+    border: 1px solid #d0e0f3;
+    border-radius: 5px;
+    margin-bottom: 7px;
+    padding: 7px 12px;
+    font-size: 1em;
+    color: #234;
+}
+
+.main-flex-notas {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 36px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 0 32px 0;
+    box-sizing: border-box;
+}
+
+.container-notas {
+    flex: 1 1 340px;
+    min-width: 280px;
+    max-width: 420px;
+    box-sizing: border-box;
+}
+
+.resultados-panel {
+    flex: 1 1 340px;
+    min-width: 280px;
+    max-width: 420px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+#resultados {
+    margin-top: 0;
+    background: #f8fafd;
+    border: 2px solid #43e97b;
+    border-radius: 12px;
+    padding: 28px 24px 18px 24px;
+    color: #1565c0;
+    font-size: 1.13em;
+    box-shadow: 0 2px 12px rgba(67,233,123,0.10);
+    min-height: 180px;
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+#resultados h3 {
+    color: #43e97b;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.18em;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+#resultados ul {
+    padding-left: 18px;
+    margin: 0;
+}
+
+#resultados li {
+    margin-bottom: 10px;
+    font-size: 1.08em;
+    color: #234;
+}
+
+@media (max-width: 900px) {
+    .main-flex-notas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+        padding: 16px 0 16px 0;
+    }
+    .container-notas, .resultados-panel {
+        max-width: 100%;
+        min-width: 0;
+    }
+    #resultados {
+        padding: 18px 8vw 12px 8vw;
+        font-size: 1em;
+    }
+}
