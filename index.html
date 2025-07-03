@@ -8,17 +8,20 @@
 </head>
 
 <body>
-    <nav class="main-nav">
-        <ul>
-            <li><a href="#calculadora-huevos" class="nav-link active">Calculadora de Huevos</a></li>
-            <li><a href="#ejercicio2" class="nav-link">Serie Matematica</a></li>
-            <li><a href="#ejercicio3" class="nav-link">Clasificacion de Deportes</a></li>
-            <li><a href="#ejercicio4" class="nav-link">Día de la Semana</a></li>
-            <li><a href="#ejercicio5" class="nav-link">Suma de Array</a></li>
-        </ul>
-    </nav>
+    <!-- Menú desplegable para seleccionar ejercicio -->
+    <div style="margin: 20px auto 20px auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <label for="menu-ejercicios"><strong>Selecciona un ejercicio:</strong></label>
+        <select id="menu-ejercicios">
+            <option value="ej1">Ejercicio 1: Calculadora de Huevos</option>
+            <option value="ej2">Ejercicio 2: Serie Matemática</option>
+            <option value="ej3">Ejercicio 3: Clasificación de Deportes</option>
+            <option value="ej4">Ejercicio 4: Día de la Semana</option>
+            <option value="ej5">Ejercicio 5: Suma de Array</option>
+            <option value="ej6">Ejercicio 6: Contador de Pares e Impares</option>
+        </select>
+    </div>
     <div class="container">
-        <section id="calculadora-huevos" class="ejercicio-section">
+        <div id="ej1" class="ejercicio-div">
             <h1>Ejercicio 1: Calculadora de Ventas de Huevos</h1>
             <form id="formulario-huevos" onsubmit="return false;">
                 <label for="tipo">Tipo de huevo:</label>
@@ -55,8 +58,8 @@
                 <button type="submit" class="button">Calcular Total</button>
             </form>
             <div class="resultado" id="resultado"></div>
-        </section>
-        <section id="ejercicio2" class="ejercicio-section" style="display:none;">
+        </div>
+        <div id="ej2" class="ejercicio-div" style="display:none;">
             <h1>Ejercicio 2: Serie Matemática</h1>
             <form id="form-serie">
                 <label for="x">Valor de x:</label>
@@ -66,8 +69,8 @@
                 <button type="submit" class="button">Calcular Serie</button>
             </form>
             <div class="resultado" id="resultado-serie"></div>
-        </section>
-        <section id="ejercicio3" class="ejercicio-section" style="display:none;">
+        </div>
+        <div id="ej3" class="ejercicio-div" style="display:none;">
             <h1>Ejercicio 3: Clasificación de Deportes</h1>
             <form id="form-deportes">
                 <label for="deporte">Selecciona el deporte:</label>
@@ -85,8 +88,8 @@
             <div class="lista-huevos" id="lista-deportes"></div>
             <button class="button" id="mostrar-clasificacion">Mostrar Clasificación</button>
             <div class="resultado" id="resultado-deportes"></div>
-        </section>
-        <section id="ejercicio4" class="ejercicio-section" style="display:none;">
+        </div>
+        <div id="ej4" class="ejercicio-div" style="display:none;">
             <h1>Ejercicio 4: Día de la Semana</h1>
             <form id="form-dia-semana">
                 <label for="numero-dia">Ingresa un número del 1 al 7:</label>
@@ -94,8 +97,8 @@
                 <button type="submit" class="button">Mostrar Día</button>
             </form>
             <div class="resultado" id="resultado-dia-semana"></div>
-        </section>
-        <section id="ejercicio5" class="ejercicio-section" style="display:none;">
+        </div>
+        <div id="ej5" class="ejercicio-div" style="display:none;">
             <h1>Ejercicio 5: Suma de Array</h1>
             <form id="sumasarray">
                 <label for="array">Ingresa números separados por coma (ej: 1,2,3,4,5):</label>
@@ -103,7 +106,19 @@
                 <button type="submit" class="button">Sumar</button>
             </form>
             <div class="resultado" id="resultado-suma-array"></div>
-        </section>
+        </div>
+        <!-- Ejercicio 6: Contador de pares e impares -->
+        <div id="ej6" class="ejercicio-div" style="display:none;">
+            <h1>Ejercicio 6: Contador de pares e impares</h1>
+            <form id="form-pares-impares">
+                <label for="numero-pi">Introduce un número:</label>
+                <input type="text" id="numero-pi" autocomplete="off" />
+                <button type="submit" class="button">Agregar</button>
+            </form>
+            <div class="resultado" id="lista-pi"></div>
+            <div class="resultado" id="resultado-pi"></div>
+            <p><em>La entrada termina al ingresar 0 o un valor no numérico.</em></p>
+        </div>
     </div>
     
     <script src="static/js/app.js"></script>
