@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Encuesta Presidencial Colombia</title>
+  <link rel="stylesheet" href=".//styles.css">
+</head>
+<body>
+  <h1>Encuesta Presidencial Colombia</h1>
+
+  <div class="encuesta-box">
+    <label for="numPersonas">Número de personas a encuestar:</label>
+    <input type="number" id="numPersonas" min="1" />
+
+    <button onclick="iniciarEncuesta()">Iniciar Encuesta</button>
+
+    <div id="formulario" style="display: none;">
+      <label for="respuesta">¿Va a votar? (sí/no):</label>
+      <select id="respuesta">
+        <option value="">--Seleccione--</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <div id="partidoBox" style="display: none;">
+        <label for="partido">¿Por cuál partido votará? (1, 2, 3):</label>
+        <select id="partido">
+          <option value="">--Seleccione partido--</option>
+          <option value="1">Partido 1</option>
+          <option value="2">Partido 2</option>
+          <option value="3">Partido 3</option>
+        </select>
+      </div>
+
+      <button onclick="registrarRespuesta()">Registrar Respuesta</button>
+    </div>
+
+    <div id="resultados" class="resultados" style="display: none;"></div>
+  </div>
+
+  <script src=".//app.js"></script>
+</body>
+</html>

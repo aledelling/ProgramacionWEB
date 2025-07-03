@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ENEL Colombia - Calculadora de Consumo</title>
+    <link rel="stylesheet" href=".//static/styles.css">
 </head>
 <body>
-    
+    <div class="container">
+        
+        <h1>Calculadora de Consumo de Energía</h1>
+        
+        <form id="consumoForm">
+            <div class="form-group">
+                <label for="numeroCuenta"> Número de cuenta (6 dígitos): </label>
+                <input type="text" id="numeroCuenta" required pattern="\d{6}" title="Debe ingresar exactamente 6 dígitos">
+            </div>
+            
+            <div class="form-group">
+                <label for="estrato">Estrato socioeconómico:</label>
+                <select id="estrato" required>
+                    <option value="">Seleccione...</option>
+                    <option value="1">Estrato 1</option>
+                    <option value="2">Estrato 2</option>
+                    <option value="3">Estrato 3</option>
+                    <option value="4">Estrato 4</option>
+                    <option value="5">Estrato 5</option>
+                    <option value="6">Estrato 6</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="tipoServicio">Tipo de servicio:</label>
+                <select id="tipoServicio" required>
+                    <option value="">Seleccione...</option>
+                    <option value="1">Residencial</option>
+                    <option value="2">Comercial</option>
+                    <option value="3">Industrial</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="kWhConsumidos">Cantidad de Kilovatios consumidos (kWh):</label>
+                <input type="number" id="kWhConsumidos" min="0" step="0.01" required>
+            </div>
+            
+            <button type="submit">Calcular Total a Pagar</button>
+        </form>
+        
+        <div id="resultados" class="resultados">
+            <h2>Detalle de la Factura</h2>
+            <div class="result-item">
+                <span>Número de cuenta:</span>
+                <span id="resNumeroCuenta"></span>
+            </div>
+            <div class="result-item">
+                <span>Estrato socioeconómico:</span>
+                <span id="resEstrato"></span>
+            </div>
+            <div class="result-item">
+                <span>Tipo de servicio:</span>
+                <span id="resTipoServicio"></span>
+            </div>
+            <div class="result-item">
+                <span>Consumo:</span>
+                <span id="resConsumo"></span>
+            </div>
+            <div class="result-item">
+                <span>Valor por consumo:</span>
+                <span id="resValorConsumo"></span>
+            </div>
+            <div class="result-item">
+                <span>Cargo fijo:</span>
+                <span id="resCargoFijo"></span>
+            </div>
+            <div class="result-item">
+                <span>Subsidio aplicado:</span>
+                <span id="resSubsidio"></span>
+            </div>
+            <div class="result-item total">
+                <span>TOTAL A PAGAR:</span>
+                <span id="resTotalPagar"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src=".//static/js/app.js"></script>
 </body>
 </html>
