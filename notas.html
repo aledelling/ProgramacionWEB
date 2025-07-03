@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTAS</title>
+    <link rel="stylesheet" href="static/notas.css">
+</head>
+<body>
+    <div class="main-flex-notas">
+        <div class="container-notas">
+            <h1>Registro de Notas - 5 Alumnos</h1>
+            <form id="form-notas">
+                <label for="matematicas">Nota Matemáticas:</label>
+                <input type="number" id="matematicas" name="matematicas" min="0" max="5" step="0.01" required>
+
+                <label for="estadistica">Nota Estadística:</label>
+                <input type="number" id="estadistica" name="estadistica" min="0" max="5" step="0.01" required>
+
+                <label for="informatica">Nota Informática:</label>
+                <input type="number" id="informatica" name="informatica" min="0" max="5" step="0.01" required>
+
+                <button type="submit">Agregar Nota</button>
+            </form>
+            <div id="contador-alumnos">Alumno 1 de 5</div>
+            <div id="lista-notas"></div>
+        </div>
+        <div class="resultados-panel">
+            <div id="resultados"></div>
+        </div>
+    </div>
+    <script src="static/js/notas.js"></script>
+</body>
+</html>

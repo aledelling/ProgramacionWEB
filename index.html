@@ -8,6 +8,14 @@
 </head>
 
 <body>
+    <nav class="main-nav">
+        <span class="nav-titulo">Programación WEB</span>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="evaluacion.html" class="btn-evaluacion" target="_blank">Evaluación de Facturación de Gas</a>
+            <a href="notas.html" target="_blank">Notas</a>
+        </div>
+    </nav>
     <!-- Menú desplegable para seleccionar ejercicio -->
     <div style="margin: 20px auto 20px auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <label for="menu-ejercicios"><strong>Selecciona un ejercicio:</strong></label>
@@ -123,16 +131,19 @@
     
     <script src="static/js/app.js"></script>
     <script>
-        
-    // Navegación entre ejercicios (solo frontend, sin recarga)
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-            document.querySelectorAll('.ejercicio-section').forEach(sec => sec.style.display = 'none');
-            const target = this.getAttribute('href');
-            document.querySelector(target).style.display = 'block';
+
+    // Menú hamburguesa responsive
+    document.addEventListener('DOMContentLoaded', function() {
+        const nav = document.querySelector('.main-nav');
+        const hamburger = document.getElementById('hamburger-menu');
+        hamburger.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+        // Cierra el menú al hacer click en un enlace (en móvil)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                nav.classList.remove('open');
+            });
         });
     });
     </script>

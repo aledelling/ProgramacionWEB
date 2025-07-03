@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANTI</title>
+    <link rel="stylesheet" href="static/evaluacion.css">
+</head>
+<body>
+    <div class="main-flex">
+        <div class="container">
+            <h1>GAS NATURAL VANTI</h1>
+            <form id="form-gas">
+                <label for="cuenta">Número de cuenta (6 dígitos):</label>
+                <input type="text" id="cuenta" name="cuenta" maxlength="6" pattern="\d{6}" required>
+
+                <label for="estrato">Estrato socioeconómico:</label>
+                <select id="estrato" name="estrato" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+
+                <label for="tipo-servicio">Tipo de servicio:</label>
+                <select id="tipo-servicio" name="tipo-servicio" required>
+                    <option value="1">Doméstico</option>
+                    <option value="2">Comercial</option>
+                    <option value="3">Industrial</option>
+                </select>
+
+                <label for="consumo">Consumo actual de gas (m³):</label>
+                <input type="number" id="consumo" name="consumo" min="0" required>
+
+                <button type="button" id="agregar-cliente">Agregar cliente</button>
+                <button type="button" id="calcular-totales">Calcular totales</button>
+            </form>
+            <div id="clientes-lista"></div>
+        </div>
+        <div class="facturas-panel">
+            <div id="resultado"></div>
+        </div>
+    </div>
+    <script src="static/js/evaluacion.js"></script>
+</body>
+</html>
