@@ -8,6 +8,7 @@
  * @returns {number|string} El monto que debe pagar cada persona o mensaje de error
  */
 function calcularPagoPorPersona(totalCuenta, porcentajePropina, numeroPersonas) {
+    
     // Validaciones
     if (typeof totalCuenta !== 'number' || typeof porcentajePropina !== 'number' || typeof numeroPersonas !== 'number') {
         return 'Error: Todos los parámetros deben ser números';

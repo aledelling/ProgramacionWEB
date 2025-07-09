@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Procesamiento de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test - Procesamiento de Pago</h1>
+        
+        <div class="test-section">
+            <h3>1. Registrar Vehículo de Prueba</h3>
+            <button class="btn" onclick="registrarVehiculoTest()">Registrar Automóvil ABC123</button>
+            <button class="btn" onclick="registrarVehiculoTest2()">Registrar Moto XYZ789</button>
+            <div id="resultadoRegistro"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>2. Seleccionar Vehículo</h3>
+            <select id="placaSeleccionada" onchange="seleccionarVehiculo()">
+                <option value="">Seleccione un vehículo...</option>
+            </select>
+            <div id="infoVehiculoSeleccionado" style="display: none; margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                <strong>Vehículo seleccionado:</strong>
+                <div id="infoVehiculo"></div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>3. Procesar Pago</h3>
+            <input type="number" id="dineroEntregado" placeholder="Ingrese monto" min="0" step="50">
+            <button class="btn" onclick="procesarPagoTest()" id="btnProcesarPago" disabled>Procesar Pago</button>
+            <div id="resultadoPago"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>4. Estado del Sistema</h3>
+            <button class="btn" onclick="mostrarEstado()">Mostrar Estado</button>
+            <div id="estadoSistema"></div>
+        </div>
+    </div>
+
+    <script src="static/js/formularioclass.js"></script>
+    <script>
+        // Función para registrar vehículo de prueba
+        function registrarVehiculoTest() {
+            const vehiculo = sistemaParqueadero.registrarVehiculo(
+                'Automóvil', 
+                'ABC123', 
+                '08:00', 
+                '10:30'
+            );
+            
+            document.getElementById('resultadoRegistro').innerHTML = `
+                <div class="result success">
+                    <strong>✅ Vehículo registrado:</strong><br>
+                    Tipo: ${vehiculo.tipo}<br>
+                    Placa: ${vehiculo.placa}<br>
+                    Tiempo: ${vehiculo.tiempoMinutos} minutos<br>
+                    Valor: $${vehiculo.valorFinal.toLocaleString()}
+                </div>
+            `;
+            
+            // Actualizar selector
+            sistemaParqueadero.actualizarSelectorVehiculos();
+        }
+        
+        function registrarVehiculoTest2() {
+            const vehiculo = sistemaParqueadero.registrarVehiculo(
+                'Moto', 
+                'XYZ789', 
+                '09:00', 
+                '11:00'
+            );
+            
+            document.getElementById('resultadoRegistro').innerHTML = `
+                <div class="result success">
+                    <strong>✅ Vehículo registrado:</strong><br>
+                    Tipo: ${vehiculo.tipo}<br>
+                    Placa: ${vehiculo.placa}<br>
+                    Tiempo: ${vehiculo.tiempoMinutos} minutos<br>
+                    Valor: $${vehiculo.valorFinal.toLocaleString()}
+                </div>
+            `;
+            
+            // Actualizar selector
+            sistemaParqueadero.actualizarSelectorVehiculos();
+        }
+        
+        // Función para seleccionar vehículo
+        function seleccionarVehiculo() {
+            const placaSeleccionada = document.getElementById('placaSeleccionada').value;
+            const btnProcesarPago = document.getElementById('btnProcesarPago');
+            const infoVehiculo = document.getElementById('infoVehiculoSeleccionado');
+            
+            if (!placaSeleccionada) {
+                btnProcesarPago.disabled = true;
+                infoVehiculo.style.display = 'none';
+                return;
+            }
+            
+            const vehiculo = sistemaParqueadero.seleccionarVehiculoPorPlaca(placaSeleccionada);
+            if (vehiculo) {
+                document.getElementById('infoVehiculo').innerHTML = `
+                    Tipo: ${vehiculo.tipo}<br>
+                    Placa: ${vehiculo.placa}<br>
+                    Tiempo: ${vehiculo.tiempoMinutos} minutos<br>
+                    Valor: $${vehiculo.valorFinal.toLocaleString()}
+                `;
+                infoVehiculo.style.display = 'block';
+                btnProcesarPago.disabled = false;
+            }
+        }
+        
+        // Función para procesar pago de prueba
+        function procesarPagoTest() {
+            const dineroEntregado = parseFloat(document.getElementById('dineroEntregado').value);
+            
+            if (!dineroEntregado || dineroEntregado <= 0) {
+                document.getElementById('resultadoPago').innerHTML = `
+                    <div class="result error">
+                        <strong>❌ Error:</strong> Por favor ingrese un monto válido.
+                    </div>
+                `;
+                return;
+            }
+            
+            const resultado = sistemaParqueadero.procesarPago(dineroEntregado);
+            
+            if (resultado.error) {
+                document.getElementById('resultadoPago').innerHTML = `
+                    <div class="result error">
+                        <strong>❌ Error:</strong> ${resultado.mensaje}
+                    </div>
+                `;
+            } else {
+                let desgloseHTML = '<strong>Desglose del cambio:</strong><ul>';
+                resultado.desglose.forEach(item => {
+                    desgloseHTML += `<li>${item.cantidad} ${item.denominacion} = $${item.subtotal.toLocaleString()}</li>`;
+                });
+                desgloseHTML += '</ul>';
+                
+                document.getElementById('resultadoPago').innerHTML = `
+                    <div class="result success">
+                        <strong>✅ Pago exitoso:</strong><br>
+                        Valor a pagar: $${resultado.valorAPagar.toLocaleString()}<br>
+                        Dinero entregado: $${resultado.dineroEntregado.toLocaleString()}<br>
+                        Cambio: $${resultado.cambioTotal.toLocaleString()}<br>
+                        ${desgloseHTML}
+                    </div>
+                `;
+                
+                // Limpiar formulario
+                document.getElementById('dineroEntregado').value = '';
+                document.getElementById('placaSeleccionada').value = '';
+                document.getElementById('btnProcesarPago').disabled = true;
+                document.getElementById('infoVehiculoSeleccionado').style.display = 'none';
+                
+                // Actualizar selector
+                sistemaParqueadero.actualizarSelectorVehiculos();
+            }
+        }
+        
+        // Función para mostrar estado del sistema
+        function mostrarEstado() {
+            const stats = sistemaParqueadero.obtenerEstadisticas();
+            const registros = sistemaParqueadero.obtenerRegistros();
+            
+            document.getElementById('estadoSistema').innerHTML = `
+                <div class="result success">
+                    <strong>📊 Estado del Sistema:</strong><br>
+                    Total vehículos: ${stats.totalVehiculos}<br>
+                    Total ingresos: $${stats.totalIngresos.toLocaleString()}<br>
+                    Total descuentos: $${stats.totalDescuentos.toLocaleString()}<br>
+                    Vehículos en sistema: ${registros.length}
+                </div>
+            `;
+        }
+        
+        // Inicializar cuando la página cargue
+        window.addEventListener('load', function() {
+            console.log('Página de prueba cargada');
+            sistemaParqueadero.actualizarSelectorVehiculos();
+        });
+    </script>
+</body>
+</html> 

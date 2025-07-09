@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Máquina de Parqueaderos</title>
+    <link rel="stylesheet" href="static/formularioclass.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header del Dashboard -->
+        <div class="dashboard-header">
+            <h1>🅿️ Gestión de Parqueadero</h1>
+            <p>Sistema de Control y Pago de Vehículos</p>
+        </div>
+        
+        <!-- Layout del Dashboard -->
+        <div class="dashboard-layout">
+            <!-- Panel completo - Todas las funciones -->
+            <div class="dashboard-panel right-panel full-width">
+                <div class="panel-header">
+                    <h2>🅿️ Sistema de Gestión</h2>
+                </div>
+                
+                <div class="full-dashboard-layout">
+                    <!-- Sección 1: Registro de Vehículos -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>📝 Registrar Vehículo</h3>
+                        </div>
+                        <div class="formulario-seccion compact">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tipo">Tipo:</label>
+                                    <select id="tipo" onchange="togglePlaca()" required>
+                                        <option value="">Seleccione...</option>
+                                        <option value="Automóvil">Automóvil ($110/min)</option>
+                                        <option value="Moto">Moto ($80/min)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group" id="placaDiv" style="display: none;">
+                                    <label for="placa">Placa:</label>
+                                    <input type="text" id="placa" placeholder="ABC123" maxlength="8" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="horaIngreso">Hora Ingreso:</label>
+                                    <input type="time" id="horaIngreso" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="horaSalida">Hora Salida:</label>
+                                    <input type="time" id="horaSalida" required>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-success compact-btn" onclick="registrarVehiculo()">📝 Registrar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección 2: Procesar Pago -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>💰 Procesar Pago</h3>
+                        </div>
+                        <div class="formulario-seccion compact">
+                            <div class="form-group">
+                                <label for="placaSeleccionada">Seleccionar Vehículo:</label>
+                                <select id="placaSeleccionada" onchange="seleccionarVehiculo()" required>
+                                    <option value="">Seleccione un vehículo...</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Información del vehículo seleccionado -->
+                            <div id="infoVehiculoSeleccionado" class="vehiculo-info compact" style="display: none;">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span class="label">Tipo:</span>
+                                        <span id="infoTipo"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Placa:</span>
+                                        <span id="infoPlaca"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Tiempo:</span>
+                                        <span id="infoTiempo"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Valor:</span>
+                                        <span id="infoValorPagar"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dineroEntregado">Dinero ($):</label>
+                                    <input type="number" id="dineroEntregado" min="0" step="50" placeholder="Monto">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <button class="btn btn-info compact-btn" onclick="procesarPago()" id="btnProcesarPago" disabled>💳 Pagar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección 3: Estadísticas -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>📊 Estadísticas</h3>
+                        </div>
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <div class="stat-icon">🚗</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="totalVehiculos">0</div>
+                                    <div class="stat-label">Total Vehículos</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">✅</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="vehiculosPagados">0</div>
+                                    <div class="stat-label">Pagados</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">⏳</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="vehiculosPendientes">0</div>
+                                    <div class="stat-label">Pendientes</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">💰</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="totalIngresos">$0</div>
+                                    <div class="stat-label">Ingresos</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">📈</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="totalDescuentos">$0</div>
+                                    <div class="stat-label">Descuentos</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-info compact-btn" onclick="mostrarTodosRegistros()">📋 Pendientes</button>
+                            <button class="btn btn-success compact-btn" onclick="mostrarEstadisticas()">📊 Detalles</button>
+                            <button class="btn btn-warning compact-btn" onclick="mostrarHistorialCompleto()">📋 Historial</button>
+                            <button class="btn compact-btn" onclick="limpiarFormularioVehiculo()">🧹 Limpiar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección 4: Información de Vehículos -->
+                    <div class="dashboard-section full-width-section">
+                        <div class="section-header">
+                            <h3>🚗 Información de Vehículos</h3>
+                        </div>
+                        
+                        <!-- Área de resultados integrada -->
+                        <div id="resultado" class="dashboard-results-integrated">
+                            <p>Selecciona un vehículo para ver su información...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/formularioclass.js"></script>
+</body>
+</html> 
